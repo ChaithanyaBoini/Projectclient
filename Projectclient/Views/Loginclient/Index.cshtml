@@ -1,0 +1,41 @@
+﻿@model Projectclient.Models.Entities.Loginclass
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Enter", "Loginclient"))
+
+{
+<div>
+    <table>
+        <tr>
+
+            <td>@Html.LabelFor(x => x.email)</td>
+            <td>@Html.TextBoxFor(x => x.email, new { id = "email" })</td>
+            <td> @Html.ValidationMessageFor(x => x.email)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(x => x.password)</td>
+            <td>@Html.TextBoxFor(x => x.password, new { id = "password" })</td>
+            <td>@Html.ValidationMessageFor(x => x.password)</td>
+        </tr>
+
+        <tr>
+            <td><input type="submit" value="Login" id="btnlogin" /> </td>
+        </tr>
+    </table>
+</div>
+
+
+if (ViewBag.msg!=null)
+    {
+        <h1>@ViewBag.msg</h1>
+
+    }
+
+
+
+
+}

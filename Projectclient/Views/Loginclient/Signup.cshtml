@@ -1,0 +1,73 @@
+﻿@model Projectclient.Models.Entities.Loginentity
+
+@{
+    ViewBag.Title = "Signup";
+}
+
+<h2>Signup</h2>
+
+
+@using (Html.BeginForm()) 
+{
+   
+    <div>
+        <table>
+            <tr>
+                <td>EMAIL</td>
+            </tr>
+            <tr>
+                <td><input type="email" id="email"/></td>
+            </tr>
+            <tr>
+                <td>PASSWORD</td>
+            </tr>
+            <tr>
+                <td><input type="password" id="password"/></td>
+            </tr>
+            <tr>
+                <td>TYPE</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="type"/></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="register" id="btnregister"/></td>
+            </tr>
+        </table>
+    </div>
+}
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#btnregister").click(function () {
+
+            var lo = {};
+            lo.email = $("#email").val();
+            lo.password = $("#password").val();
+            lo.type = $("#type").val();
+        
+
+            $.ajax({
+                type: 'post',
+                data: JSON.stringify(lo),
+                url: 'https://localhost:44334/api/Project/Signup',
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8',
+                success: function (data)
+                {
+                    alert(data);
+                },
+                error: function (x, err)
+                {
+                    alert(x.readyState);
+                    alert(x.responseText);
+                }
+            });
+
+        });
+
+    });
+</script>

@@ -1,0 +1,73 @@
+﻿@model Projectclient.Models.Entities.Loginclass
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+@using(Html.BeginForm("Loginxyz", "Loginclient"))
+{
+                    <div>
+                        <table>
+                            <tr>
+                                
+                                <td>@Html.LabelFor(x=>x.email)</td>
+                                 <td>@Html.TextBoxFor(x => x.email, new { id = "email" })</td>
+                                  <td> @Html.ValidationMessageFor(x => x.email)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.password)</td>
+                                <td>@Html.TextBoxFor(x => x.password, new { id = "password" })</td>
+                                <td>@Html.ValidationMessageFor(x => x.password)</td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="button" value="Login" id="btnlogin" /> </td>
+                            </tr>
+                        </table>
+                    </div>
+            }
+
+<script>
+    $(document).ready(function () {
+        $("#btnlogin").click(function () {
+
+            var lo = {};
+            lo.email = $("#email").val();
+            lo.password = $("#password").val();
+            alert(lo);
+           
+
+
+            $.ajax({
+
+                type: 'post',
+                data: JSON.stringify(lo),
+                url: 'https://localhost:44334/api/Project/login',
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    alert(data);
+
+                   //var Job = data;
+                   // alert(Job);
+                   // window.location.href = "https://localhost:44305/Loginclient/Loginxyz?s=" + data;
+                    Tempdata["Job"] = data;
+                    alert(Tempdata["Job"]);
+                    // Session["type"] = data;
+
+                    //alert("hello");
+                    //alert(Session["type"])
+                },
+                error: function (x, err)
+                {
+                    alert(x.readyState);
+                    alert(x.responsetext);
+                }
+            });
+        });
+    });
+
+</script>
+
+
+

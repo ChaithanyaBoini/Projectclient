@@ -1,0 +1,22 @@
+﻿@*@{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }*@
+
+
+@{
+    // if (Request.Cookies["utype"]==null)
+    if (Session["type"]==null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    //else if (Request.Cookies["utype"].Value.Equals("Admin"))
+    else if (Session["type"].Equals("ADMIN"))
+    {
+        Layout = "~/Views/Shared/_Master1.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Master2.cshtml";
+    }
+}
+
