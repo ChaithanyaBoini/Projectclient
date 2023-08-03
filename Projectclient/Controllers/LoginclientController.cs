@@ -38,7 +38,7 @@ namespace Projectclient.Controllers
         }
         public ActionResult Enter(Class1 c)
         {
-           Loginentity l = null;
+            Loginentity l = null;
             string st = "";
             // HttpClient client = new HttpClient();
             // Class1 emps = null;
@@ -81,31 +81,33 @@ namespace Projectclient.Controllers
                     // result.Content.ReadAsStreamAsync<IList<EMP>>();
 
 
-                    if(l!=null)
-                    {
-                        Session["type"]=l.type;
-                        Session["email"]=l.email;
-                        ViewBag.msg="Login Success";
-                    }
-                    else
-                    {
-                        ViewBag.msg="Invalid Credentials";
-                    }
+
+                    Session["type"]=l.type;
+                    Session["email"]=l.email;
+                    ViewBag.msg="Login Success";
+                    return View("success");
+
+                     
+
                 }
                 else
                 {
-                    var readdata = result.Content.ReadAsAsync<String>();
+                    var readdata = result.Content.ReadAsAsync<Loginentity>();
                     readdata.Wait();
-                    st=readdata.Result;
-
-                    //ModelState.AddModelError(string.Empty, "No emp found");
+                    l=readdata.Result;
+                    ViewBag.msg="Invalid Credentials";
+                    return View("Index");
                 }
+                //ModelState.AddModelError(string.Empty, "No emp found");
             }
-            //   ViewBag.msg=st;
+        }
+        //   ViewBag.msg=st;
 
-            return View("Index");
 
 
+        public ActionResult success()
+        {
+            return View();
         }
 
         public ActionResult Logout()
@@ -119,15 +121,13 @@ namespace Projectclient.Controllers
             System.Web.Security.FormsAuthentication.SignOut();
             Session["type"]=null;
             Session.Timeout=1;
-           // return View();
-           return RedirectToAction("Index");
+            // return View();
+            return RedirectToAction("Index");
         }
 
 
-        public ActionResult design()
-        {
-            return View();
-        }
     }
-}
+    }
+
+
     

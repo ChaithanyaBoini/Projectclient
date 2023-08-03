@@ -1,4 +1,4 @@
-﻿@model Projectclient.Models.Entities.Loginentity
+﻿@model Projectclient.Models.Entities.LOGIN
 
 @{
     ViewBag.Title = "Signup";
@@ -7,34 +7,39 @@
 <h2>Signup</h2>
 
 
-@using (Html.BeginForm()) 
+@using(Html.BeginForm()) 
 {
-   
-    <div>
+    
         <table>
+            <tr>
+                <td>USERNAME</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="username" /></td>
+            </tr>
             <tr>
                 <td>EMAIL</td>
             </tr>
             <tr>
-                <td><input type="email" id="email"/></td>
+                <td><input type="email" id="email" /></td>
             </tr>
             <tr>
                 <td>PASSWORD</td>
             </tr>
             <tr>
-                <td><input type="password" id="password"/></td>
+                <td><input type="password" id="password" /></td>
             </tr>
             <tr>
                 <td>TYPE</td>
             </tr>
             <tr>
-                <td><input type="text" id="type"/></td>
+                <td><input type="text" id="type" /></td>
             </tr>
             <tr>
-                <td><input type="button" value="register" id="btnregister"/></td>
+                <td><input type="button" value="register" id="btnregister" /></td>
             </tr>
         </table>
-    </div>
+    
 }
 
 
@@ -45,9 +50,12 @@
         $("#btnregister").click(function () {
 
             var lo = {};
+            lo.username = $("#username");
             lo.email = $("#email").val();
             lo.password = $("#password").val();
             lo.type = $("#type").val();
+            alert(lo);
+            alert(JSON.stringify(lo));
         
 
             $.ajax({
